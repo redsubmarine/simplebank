@@ -5,6 +5,8 @@ import (
 	db "github.com/redsubmarine/simplebank/db/sqlc"
 )
 
+var okResponse = gin.H{"success": "ok"}
+
 // Server serves HTTP requests for our banking service.
 type Server struct {
 	store  *db.Store
@@ -21,7 +23,8 @@ func NewServer(store *db.Store) *Server {
 
 	router.POST("/accounts", server.createAccount)
 	router.GET("/accounts/:id", server.getAccount)
-	router.GET("/accounts", server.listAccount)
+	router.GET("/accounts", server.listAccounts)
+	router.DELETE("/accounts/:id", server.deleteAccount)
 
 	return server
 }
