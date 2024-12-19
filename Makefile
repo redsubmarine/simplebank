@@ -2,13 +2,13 @@ db:
 	docker-compose up
 
 postgres:
-	docker run --name npostgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
+	docker run --name postgres16 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
 
 createdb:
-	docker exec -it npostgres12 createdb --username=root --owner=root simple_bank
+	docker exec -it postgres16 createdb --username=root --owner=root simple_bank
 
 dropdb:
-	docker exec -it npostgres12 dropdb simple_bank
+	docker exec -it postgres16 dropdb simple_bank
 
 migrateup:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up
