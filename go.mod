@@ -1,13 +1,15 @@
 module github.com/redsubmarine/simplebank
 
-go 1.21.1
+go 1.22
+
+toolchain go1.23.4
 
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/lib/pq v1.10.9
 	github.com/spf13/viper v1.17.0
 	github.com/stretchr/testify v1.10.0
-	go.uber.org/mock v0.3.0
+	go.uber.org/mock v0.5.0
 )
 
 require (
