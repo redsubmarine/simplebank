@@ -1,0 +1,11 @@
+### Test createUser API
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "red",
+  "full_name": "red yang",
+  "email": "red@wonseok.me",
+  "password": "secret"
+}
+
