@@ -1,0 +1,18 @@
+### Test createAccount API
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "owner": "abc abc",
+  "currency" : "USD"
+}
+
+### Test createAccount API
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "owner": "aploqn",
+  "currency" : "USD"
+}
+
