@@ -14,6 +14,3 @@ go get github.com/stretchr/testify
 go install go.uber.org/mock/mockgen@latest
 asdf reshim
 go get go.uber.org/mock/mockgen/model
-
-
-mockgen -package mockdb -destination db/mock/store.go github.com/redsubmarine/simplebank/db/sqlc Store
