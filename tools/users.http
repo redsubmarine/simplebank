@@ -9,3 +9,12 @@ Content-Type: application/json
   "password": "secret"
 }
 
+### Test loginUser API
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "username": "red",
+  "password": "secret"
+}
+
