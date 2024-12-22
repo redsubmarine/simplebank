@@ -18,6 +18,7 @@ COPY start.sh .
 COPY wait-for.sh .
 COPY db/migration ./migration
 
+# app.env 에 server address 포트와 연결
 EXPOSE 8080
 CMD [ "/app/main" ]
 ENTRYPOINT [ "/app/start.sh" ]
