@@ -2,7 +2,7 @@ db:
 	docker-compose up
 
 postgres:
-	docker run --name postgres16 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
+	docker run --name postgres16 --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
 
 createdb:
 	docker exec -it postgres16 createdb --username=root --owner=root simple_bank
@@ -37,4 +37,21 @@ server:
 mock: # generate mock for db
 	mockgen -package mockdb -destination db/mock/store.go github.com/redsubmarine/simplebank/db/sqlc Store
 
-.PHONY: postgres db createdb dropdb migrateup migrateup1 migratedown migratedown1 sqlc test server mock
+dockerize:
+	docker build -f Dockerfile -t simplebank:latest .
+
+docker\:run-release:
+	docker run --name simplebank --network bank-network -p 8080:8080 -e GIN_MODE=release -e DB_SOURCE="postgresql://root:secret@postgres16:5432/simple_bank?sslmode=disable" simplebank:latest
+
+docker\:run:
+	docker run --name simplebank_dev --network bank-network -p 8080:8080 -e DB_SOURCE="postgresql://root:secret@postgres16:5432/simple_bank?sslmode=disable" simplebank:latest
+
+docker\:create-network: # postgres, simple bank 연결
+	docker network create bank-network
+
+docker\:connect-network:
+	docker network connect bank-network postgres16
+
+.PHONY:
+	postgres db createdb dropdb migrateup migrateup1 migratedown migratedown1
+	sqlc test server mock dockerize docker\:run docker\:run-release docker\:create-network
