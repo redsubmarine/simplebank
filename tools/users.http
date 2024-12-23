@@ -3,9 +3,9 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "username": "blue",
+  "username": "red",
   "full_name": "red yang",
-  "email": "blue@wonseok.me",
+  "email": "red@wonseok.me",
   "password": "secret"
 }
 
